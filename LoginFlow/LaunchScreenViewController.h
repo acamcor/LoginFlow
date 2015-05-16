@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  LaunchScreenViewController.h
 //  LoginFlow
 //
 //  Created by Angel Campiña on 15/05/15.
@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface LaunchScreenViewController : UIViewController
 
 
 @end
-
