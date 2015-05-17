@@ -10,5 +10,4 @@
 
 @interface LaunchScreenViewController : UIViewController
 
-
 @end
