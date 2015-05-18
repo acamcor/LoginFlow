@@ -84,11 +84,12 @@
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="x7Z-g7-B9E" appends="YES" id="4Xb-RX-AlE"/>
+                            <outletCollection property="gestureRecognizers" destination="dd0-zU-MTz" appends="YES" id="QMg-zg-bNS"/>
                         </connections>
                     </view>
                     <connections>
-                        <outlet property="password" destination="lqp-G3-qSe" id="FMb-ta-2RI"/>
-                        <outlet property="user" destination="Jdf-Cj-2yV" id="pQf-Px-bnm"/>
+                        <outlet property="_password" destination="lqp-G3-qSe" id="faj-1u-AsQ"/>
+                        <outlet property="_user" destination="Jdf-Cj-2yV" id="7ha-R2-UK8"/>
                         <segue destination="0Nm-DN-5Hd" kind="custom" identifier="launch" customClass="CustomSegue" id="8EQ-JQ-lHg"/>
                     </connections>
                 </viewController>
@@ -98,6 +99,11 @@
                         <action selector="handleSwipe:" destination="BYZ-38-t0r" id="DzZ-ra-g3l"/>
                     </connections>
                 </swipeGestureRecognizer>
+                <tapGestureRecognizer id="dd0-zU-MTz">
+                    <connections>
+                        <action selector="handleTap:" destination="BYZ-38-t0r" id="yUR-vO-lb7"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="156" y="79"/>
         </scene>
