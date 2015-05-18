@@ -17,9 +17,10 @@
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     [window insertSubview:toViewController.view belowSubview:fromViewController.view];
     
-    [UIView animateWithDuration:2.0 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         fromViewController.view.alpha = 0.0;
     } completion:^(BOOL finished) {
+        // Next line removes fromViewController from rootViewController and so its views from window.subviews
         window.rootViewController = toViewController;
     }];
 }
