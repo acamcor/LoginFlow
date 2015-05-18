@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, ACEmptyCredentials) {
+    ACEmptyNone,
+    ACEmptyUser,
+    ACEmptyPassword,
+    ACEmptyUserPassword
+};
+
 @interface LoginViewController : UIViewController <UITextFieldDelegate>
 
 @end

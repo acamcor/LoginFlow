@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "UICKeyChainStore.h"
 
 @interface LoginViewController ()
 
@@ -14,13 +15,15 @@
 
 @implementation LoginViewController
 {
-    __weak IBOutlet UITextField *user;
-    __weak IBOutlet UITextField *password;
+    __weak IBOutlet UITextField *_user;
+    __weak IBOutlet UITextField *_password;
+    UICKeyChainStore *_keyChain;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    _keyChain = [UICKeyChainStore keyChainStoreWithService:@"com.campina.angel"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,19 +32,95 @@
 }
 
 - (IBAction)handleSwipe:(id)sender {
-    [self performSegueWithIdentifier:@"launch" sender:sender];
+    //[self performSegueWithIdentifier:@"launch" sender:sender];
+}
+
+- (IBAction)handleTap:(id)sender {
+    [self.view endEditing:YES];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     // text fields delegate set on storyboard
-    if (textField == user) {
-        [password becomeFirstResponder];
+    if (textField == _user) {
+        [_password becomeFirstResponder];
     } else {
-        [textField resignFirstResponder];
-        [self performSegueWithIdentifier:@"registeredUser" sender:self];
+        if ([self shouldPerformSegueWithIdentifier:@"registeredUser" sender:self]) {
+            // performSegueWithIdentifier sets endEditing to YES resigning the keyboard
+            //[textField resignFirstResponder];
+            [self performSegueWithIdentifier:@"registeredUser" sender:self];
+        }
     }
     
     return YES;
+}
+
+- (BOOL)checkKeyChainUser:(NSString *)user password:(NSString *)password {
+    return [user isEqualToString:@"user"]/*_keyChain[@"user"]]*/ && [password isEqualToString:@"password"] /*]_keyChain[@"password"]]*/;
+}
+
+- (ACEmptyCredentials)isEmptyUser:(NSString *)user password:(NSString *)password {
+    BOOL isEmptyUser = [user isEqualToString:@""];
+    BOOL isEMptyPassword = [password isEqualToString:@""];
+    
+    if (isEmptyUser && isEMptyPassword) {
+        return ACEmptyUserPassword;
+    }
+    
+    if (isEmptyUser) {
+        return ACEmptyUser;
+    }
+    
+    if (isEMptyPassword) {
+        return ACEmptyPassword;
+    }
+    
+    return ACEmptyNone;
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    ACEmptyCredentials credentials = [self isEmptyUser:_user.text password:_password.text];
+    
+    if (credentials != ACEmptyNone) {
+        [self showAlertWithMessage:credentials];
+        return NO;
+    }
+    
+    if ([self checkKeyChainUser:_user.text password:_password.text]) {
+        [self.view endEditing:YES];
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (void)showAlertWithMessage:(ACEmptyCredentials)credentials {
+    NSString *message;
+    
+    switch (credentials) {
+        case ACEmptyNone:
+            return;
+            break;
+        case ACEmptyUser:
+            message = @"El nombre de usuario no puede estar en blanco";
+            break;
+        case ACEmptyPassword:
+            message = @"La contraseña no puede estar en blanco";
+            break;
+        case ACEmptyUserPassword:
+            message = @"El nombre de usuario y la contraseña no pueden estar en blanco";
+            break;
+    }
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                             message:message
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *closeAction = [UIAlertAction actionWithTitle:@"Cerrar"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:nil];
+    
+    [alertController addAction:closeAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 @end
