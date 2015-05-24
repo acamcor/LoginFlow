@@ -35,15 +35,6 @@
     }
 }
 
-- (IBAction)toLogin:(id)sender {
-    [self performSegueWithIdentifier:@"login" sender:self];
-    
-}
-
-- (IBAction)toApp:(id)sender {
-    [self performSegueWithIdentifier:@"app" sender:self];
-}
-
 /*
 #pragma mark - Navigation
 
