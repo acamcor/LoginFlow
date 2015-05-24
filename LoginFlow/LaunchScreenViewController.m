@@ -24,6 +24,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    BOOL hasLoginKey = [[NSUserDefaults standardUserDefaults] boolForKey:@"hasLoginKey"];
+    
+    if (hasLoginKey) {
+        [self performSegueWithIdentifier:@"app" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"login" sender:self];
+    }
+}
+
 - (IBAction)toLogin:(id)sender {
     [self performSegueWithIdentifier:@"login" sender:self];
     
