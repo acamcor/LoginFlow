@@ -15,6 +15,7 @@
 		0B74EDCD1B06570B00B33946 /* LoginFlowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B74EDCC1B06570B00B33946 /* LoginFlowTests.m */; };
 		0B74EDD81B065BF200B33946 /* LaunchScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B74EDD71B065BF200B33946 /* LaunchScreenViewController.m */; };
 		0B74EDDB1B06649200B33946 /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B74EDDA1B06649200B33946 /* AppViewController.m */; };
+		0BB356AA1B0FAA070005650C /* NGLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB356A91B0FAA070005650C /* NGLUser.m */; };
 		0BCE32401B0668F40087F577 /* CustomSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE323F1B0668F40087F577 /* CustomSegue.m */; };
 		0BCE32431B0787D80087F577 /* LaunchScreenSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE32421B0787D80087F577 /* LaunchScreenSegue.m */; };
 		D5F4960D35B75E80C30FD893 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E3EFF4565777E7084B675E /* libPods.a */; };
@@ -47,6 +48,8 @@
 		0B74EDD71B065BF200B33946 /* LaunchScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchScreenViewController.m; sourceTree = "<group>"; };
 		0B74EDD91B06649200B33946 /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppViewController.h; sourceTree = "<group>"; };
 		0B74EDDA1B06649200B33946 /* AppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppViewController.m; sourceTree = "<group>"; };
+		0BB356A81B0FAA070005650C /* NGLUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGLUser.h; sourceTree = "<group>"; };
+		0BB356A91B0FAA070005650C /* NGLUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGLUser.m; sourceTree = "<group>"; };
 		0BCE323E1B0668F40087F577 /* CustomSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSegue.h; sourceTree = "<group>"; };
 		0BCE323F1B0668F40087F577 /* CustomSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegue.m; sourceTree = "<group>"; };
 		0BCE32411B0787D80087F577 /* LaunchScreenSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchScreenSegue.h; sourceTree = "<group>"; };
@@ -113,6 +116,8 @@
 				0BCE323F1B0668F40087F577 /* CustomSegue.m */,
 				0BCE32411B0787D80087F577 /* LaunchScreenSegue.h */,
 				0BCE32421B0787D80087F577 /* LaunchScreenSegue.m */,
+				0BB356A81B0FAA070005650C /* NGLUser.h */,
+				0BB356A91B0FAA070005650C /* NGLUser.m */,
 			);
 			path = LoginFlow;
 			sourceTree = "<group>";
@@ -298,6 +303,7 @@
 				0B74EDB91B06570B00B33946 /* LoginViewController.m in Sources */,
 				0BCE32401B0668F40087F577 /* CustomSegue.m in Sources */,
 				0B74EDD81B065BF200B33946 /* LaunchScreenViewController.m in Sources */,
+				0BB356AA1B0FAA070005650C /* NGLUser.m in Sources */,
 				0BCE32431B0787D80087F577 /* LaunchScreenSegue.m in Sources */,
 				0B74EDB61B06570B00B33946 /* AppDelegate.m in Sources */,
 				0B74EDB31B06570B00B33946 /* main.m in Sources */,

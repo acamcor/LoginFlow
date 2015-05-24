@@ -39,6 +39,13 @@
     [self.view endEditing:YES];
 }
 
+- (IBAction)registerUser:(id)sender {
+    _keyChain[@"user"] = _user.text;
+    _keyChain[@"password"] = _password.text;
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasLoginKey"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     // text fields delegate set on storyboard
     if (textField == _user) {
@@ -55,7 +62,7 @@
 }
 
 - (BOOL)checkKeyChainUser:(NSString *)user password:(NSString *)password {
-    return [user isEqualToString:@"user"]/*_keyChain[@"user"]]*/ && [password isEqualToString:@"password"] /*]_keyChain[@"password"]]*/;
+    return [user isEqualToString:_keyChain[@"user"]] && [password isEqualToString:_keyChain[@"password"]];
 }
 
 - (ACEmptyCredentials)isEmptyUser:(NSString *)user password:(NSString *)password {
@@ -85,12 +92,13 @@
         return NO;
     }
     
-    if ([self checkKeyChainUser:_user.text password:_password.text]) {
-        [self.view endEditing:YES];
-        return YES;
+    if (![self checkKeyChainUser:_user.text password:_password.text]) {
+        [self showAlertWithMessage:ACEmptyUserPassword];
+        return NO;
     }
     
-    return NO;
+    [self.view endEditing:YES];
+    return YES;
 }
 
 - (void)showAlertWithMessage:(ACEmptyCredentials)credentials {
