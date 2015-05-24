@@ -11,26 +11,26 @@
 @implementation LaunchScreenSegue
 
 - (void)perform {
-    UIViewController *fromViewController = (UIViewController *)self.sourceViewController;
-    UIViewController *toViewController = (UIViewController *)self.destinationViewController;
+    UIViewController *sourceViewController = (UIViewController *)self.sourceViewController;
+    UIViewController *destinationViewController = (UIViewController *)self.destinationViewController;
     
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    [window insertSubview:toViewController.view aboveSubview:fromViewController.view];
+    [window insertSubview:destinationViewController.view aboveSubview:sourceViewController.view];
     
-    CGFloat centerX = CGRectGetMidX(toViewController.view.frame);
-    CGFloat centerY = CGRectGetMidY(toViewController.view.frame);
+    CGFloat centerX = CGRectGetMidX(destinationViewController.view.frame);
+    CGFloat centerY = CGRectGetMidY(destinationViewController.view.frame);
     CGRect initialRect = CGRectMake(centerX, centerY, 0.0, 0.0);
     UIBezierPath *circleMaskPathInitial = [UIBezierPath bezierPathWithOvalInRect:initialRect];
     
-    CGFloat width = CGRectGetWidth(toViewController.view.frame);
-    CGFloat height = CGRectGetHeight(toViewController.view.frame);
+    CGFloat width = CGRectGetWidth(destinationViewController.view.frame);
+    CGFloat height = CGRectGetHeight(destinationViewController.view.frame);
     float radius = sqrtf(width * width + height * height) / 2;
     CGRect finalRect = CGRectInset(initialRect, -radius, -radius);
     UIBezierPath *circleMaskPathFinal = [UIBezierPath bezierPathWithOvalInRect:finalRect];
-    
+
     CAShapeLayer *mask = [CAShapeLayer layer];
     mask.path = circleMaskPathFinal.CGPath;
-    toViewController.view.layer.mask = mask;
+    destinationViewController.view.layer.mask = mask;
     
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath: @"path"];
     animation.fromValue = (__bridge id)(circleMaskPathInitial.CGPath);
@@ -44,9 +44,9 @@
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    UIViewController *toViewController = (UIViewController *)self.destinationViewController;
+    UIViewController *destinationViewController = (UIViewController *)self.destinationViewController;
     // Next line removes fromViewController from rootViewController and so its views from window.subviews
-    window.rootViewController = toViewController;
+    window.rootViewController = destinationViewController;
 }
 
 @end
