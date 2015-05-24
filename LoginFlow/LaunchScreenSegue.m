@@ -9,28 +9,33 @@
 #import "LaunchScreenSegue.h"
 
 @implementation LaunchScreenSegue
+{
+    UIView *_view;
+}
 
 - (void)perform {
     UIViewController *sourceViewController = (UIViewController *)self.sourceViewController;
     UIViewController *destinationViewController = (UIViewController *)self.destinationViewController;
     
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    [window insertSubview:destinationViewController.view aboveSubview:sourceViewController.view];
+    _view = [destinationViewController.view snapshotViewAfterScreenUpdates:YES];
     
-    CGFloat centerX = CGRectGetMidX(destinationViewController.view.frame);
-    CGFloat centerY = CGRectGetMidY(destinationViewController.view.frame);
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    [window insertSubview:_view aboveSubview:sourceViewController.view];
+    
+    CGFloat centerX = CGRectGetMidX(_view.frame);
+    CGFloat centerY = CGRectGetMidY(_view.frame);
     CGRect initialRect = CGRectMake(centerX, centerY, 0.0, 0.0);
     UIBezierPath *circleMaskPathInitial = [UIBezierPath bezierPathWithOvalInRect:initialRect];
     
-    CGFloat width = CGRectGetWidth(destinationViewController.view.frame);
-    CGFloat height = CGRectGetHeight(destinationViewController.view.frame);
+    CGFloat width = CGRectGetWidth(_view.frame);
+    CGFloat height = CGRectGetHeight(_view.frame);
     float radius = sqrtf(width * width + height * height) / 2;
     CGRect finalRect = CGRectInset(initialRect, -radius, -radius);
     UIBezierPath *circleMaskPathFinal = [UIBezierPath bezierPathWithOvalInRect:finalRect];
 
     CAShapeLayer *mask = [CAShapeLayer layer];
     mask.path = circleMaskPathFinal.CGPath;
-    destinationViewController.view.layer.mask = mask;
+    _view.layer.mask = mask;
     
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath: @"path"];
     animation.fromValue = (__bridge id)(circleMaskPathInitial.CGPath);
@@ -47,6 +52,7 @@
     UIViewController *destinationViewController = (UIViewController *)self.destinationViewController;
     // Next line removes fromViewController from rootViewController and so its views from window.subviews
     window.rootViewController = destinationViewController;
+    [_view removeFromSuperview];
 }
 
 @end
