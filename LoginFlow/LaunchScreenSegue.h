@@ -10,4 +10,6 @@
 
 @interface LaunchScreenSegue : UIStoryboardSegue
 
+@property (assign, nonatomic) CFTimeInterval duration;
+
 @end

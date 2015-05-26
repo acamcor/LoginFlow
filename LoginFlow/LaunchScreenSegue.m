@@ -13,6 +13,17 @@
     UIView *_view;
 }
 
+- (instancetype)initWithIdentifier:(NSString *)identifier source:(UIViewController *)source destination:(UIViewController *)destination {
+    self = [super initWithIdentifier:identifier source:source destination:destination];
+    
+    if (self) {
+        // default duration - value in seconds
+        _duration = 0.25;
+    }
+    
+    return self;
+}
+
 - (void)perform {
     UIViewController *sourceViewController = (UIViewController *)self.sourceViewController;
     UIViewController *destinationViewController = (UIViewController *)self.destinationViewController;
@@ -41,7 +52,7 @@
     animation.fromValue = (__bridge id)(circleMaskPathInitial.CGPath);
     animation.toValue = (__bridge id)(circleMaskPathFinal.CGPath);
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-    animation.duration = 0.25;
+    animation.duration = _duration;
     animation.delegate = self;
     
     [mask addAnimation:animation forKey:@"path"];
