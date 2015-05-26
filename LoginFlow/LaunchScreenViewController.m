@@ -36,15 +36,6 @@
     }
 }
 
-- (IBAction)toLogin:(id)sender {
-    [self performSegueWithIdentifier:@"login" sender:self];
-    
-}
-
-- (IBAction)toApp:(id)sender {
-    [self performSegueWithIdentifier:@"app" sender:self];
-}
-
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
