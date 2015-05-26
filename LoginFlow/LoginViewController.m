@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "UICKeyChainStore.h"
+#import "UIView+NGLAnimations.h"
 
 @interface LoginViewController ()
 
@@ -31,12 +32,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)handleSwipe:(id)sender {
-    //[self performSegueWithIdentifier:@"launch" sender:sender];
-}
-
 - (IBAction)handleTap:(id)sender {
     [self.view endEditing:YES];
+}
+// First action is called and then shouldPerformSegueWithIdentifier
+- (IBAction)loginUser:(id)sender {
+    [UIView tapAnimation:(UIView *)sender];
 }
 
 - (IBAction)registerUser:(id)sender {
@@ -44,6 +45,8 @@
     _keyChain[@"password"] = _password.text;
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasLoginKey"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [UIView tapAnimation:(UIView *)sender];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
